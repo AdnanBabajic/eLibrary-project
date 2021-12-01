@@ -1,0 +1,44 @@
+﻿@model IEnumerable<eLibrary_project.Models.Request>
+
+@{
+    ViewBag.Title = "Requests List";
+}
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th></th>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.ActionLink("Accept", "AcceptRequest", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteRequest", new { id = item.Id })
+                </td>
+            </tr>
+
+
+        </table>
+
+    }
+}
+else
+{
+    <h2>There are no rent requests right now.</h2>
+}

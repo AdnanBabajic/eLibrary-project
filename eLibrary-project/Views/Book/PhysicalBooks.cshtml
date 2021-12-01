@@ -1,0 +1,71 @@
+﻿@model IEnumerable<eLibrary_project.Models.PhysicalBook>
+
+@{
+    ViewBag.Title = "Physical Books";
+}
+
+<h2>PhysicalBooks</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseYear)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@if(Model != null) { 
+    foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Location)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsAvailable)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Author)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Genre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReleaseYear)
+    </td>
+        <td>@Html.ActionLink("Details", "DetailsPhysicalBook", new { id = item.Id })</td>
+    @if (User.IsInRole("admin"))
+    {
+        <td>
+            @Html.ActionLink("Edit", "EditPhyisicalBook", new { item.Id, item.Location, item.IsAvailable, item.Name, item.Author, item.Genre, item.ReleaseYear, item.CoverImg }) |
+            @Html.ActionLink("Delete", "DeletePhysicalBook", new { id = item.Id })
+        </td>
+    }
+    else
+    {
+        <td>
+            @Html.ActionLink("Rent", "RentPhysicalBook", new { id = item.Id })
+        </td>
+    }
+</tr> }
+}
+
+</table>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<eLibrary_project.Models.Rental>
+
+@{
+    ViewBag.Title = "Rented List";
+}
+
+<h2>RentedList</h2>
+
+@if(Model != null) { 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.ActionLink("Returned", "BookReturned", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+} else
+            {
+                <h2>There are no rented books.</h2>
+            }
